@@ -4,7 +4,7 @@ Edit all the Texture provided in the Texture Folder
 Upload to a webserver and replace the URL within the script
 
 TODO : 
-• Add a trigger that will run the code to replace the texture.
+• ~~Add a trigger that will run the code to replace the texture.~~
 
 
 Credit : karma_83 for providing all the Textures and LOD Location
