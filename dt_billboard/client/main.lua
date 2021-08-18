@@ -80,7 +80,7 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(10)
 		if not Loaded then return end
-		if proximity < 650.0 and not Run then
+		if proximity < 86.0 and not Run then
 			AddReplaceTexture("dt1_22_bld2x+hi", "dt1_22_cmk_tp02", "duiTxd1", "duiTex")
 			AddReplaceTexture("dt1_22_bld1x+hi", "nxg_dt1_22_cmk_tp02", "duiTxd1", "duiTex")
 			AddReplaceTexture("dt1_22_bld1x", "nxg_dt1_22_cmk_tp02", "duiTxd1", "duiTex")
@@ -93,7 +93,7 @@ Citizen.CreateThread(function()
 			Citizen.CreateThread(function()
 				while true do
 					Wait(0)
-					if proximity > 650.0 then
+					if proximity > 86.0 then
 						Run = false
 					else
 						Run = true
