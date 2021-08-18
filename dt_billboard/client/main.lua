@@ -1,53 +1,64 @@
-AddEventHandler("onResourceStart",function(xPlayer)
-		Wait(60000)
+local Loaded = false
+
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler("esx:playerLoaded",function(xPlayer)
+		Wait(20000)
+        -- Downtown
+        -- Texture Dictionary : dt1_22_bld2x.ytd
+        -- Texture Dictionary : dt1_22_bld2x+hi.ytd
+        -- Texture Name : dt1_22_cmk_tp02
         Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd")
+                local txd = CreateRuntimeTxd("duiTxd1")
                 local duiObj = CreateDui("http://WEBSERVER/dt1_22_cmk_tp02_1024.png", 1024, 1024)
                 _G.duiObj = duiObj
                 local dui = GetDuiHandle(duiObj)
                 local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-                AddReplaceTexture("dt1_22_bld2x+hi", "dt1_22_cmk_tp02", "duiTxd", "duiTex")
-                AddReplaceTexture("dt1_22_bld1x+hi", "nxg_dt1_22_cmk_tp02", "duiTxd", "duiTex")
-                AddReplaceTexture("dt1_22_bld1x", "nxg_dt1_22_cmk_tp02", "duiTxd", "duiTex")
-                AddReplaceTexture("dt1_22_bldg2_detail2b+hidr", "nxg_dt1_22_cmk_tp02", "duiTxd", "duiTex")
-            end)
+		end)
 
         Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd")
+                local txd = CreateRuntimeTxd("duiTxd2")
                 local duiObj = CreateDui("http://WEBSERVER/dt1_22_cmk_tp02_512.png", 512, 512)
                 _G.duiObj = duiObj
                 local dui = GetDuiHandle(duiObj)
                 local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-                AddReplaceTexture("dt1_22_bld2x", "dt1_22_cmk_tp02", "duiTxd", "duiTex")
-            end)
+        end)
 
         Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd")
+                local txd = CreateRuntimeTxd("duiTxd3")
                 local duiObj = CreateDui("http://WEBSERVER/dt1_22_walls_lod_0001.png", 256, 1024)
                 _G.duiObj = duiObj
                 local dui = GetDuiHandle(duiObj)
                 local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-                AddReplaceTexture("dt1_22_lod", "dt1_22_walls_lod_0001", "duiTxd", "duiTex")
+                
             end)
 
         Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd")
+                local txd = CreateRuntimeTxd("duiTxd4")
                 local duiObj = CreateDui("http://WEBSERVER/dt1_22_bposter_lod.png", 256, 512)
                 _G.duiObj = duiObj
                 local dui = GetDuiHandle(duiObj)
                 local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-                AddReplaceTexture("dt1_22_lod", "dt1_22_bposter_lod", "duiTxd", "duiTex")
             end)
 
         Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd")
+                local txd = CreateRuntimeTxd("duiTxd5")
                 local duiObj = CreateDui("http://WEBSERVER/dt1_22_superlod.png", 1024, 1024)
                 _G.duiObj = duiObj
                 local dui = GetDuiHandle(duiObj)
                 local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-                AddReplaceTexture("dt1_lod_emissive_7_20_children", "dt1_22_superlod", "duiTxd", "duiTex")
-                AddReplaceTexture("dt1_lod_12_13_22_23_children", "dt1_22_superlod", "duiTxd", "duiTex")
         end)
+		Wait(10000)
+		AddReplaceTexture("dt1_22_bld2x+hi", "dt1_22_cmk_tp02", "duiTxd1", "duiTex")
+		AddReplaceTexture("dt1_22_bld1x+hi", "nxg_dt1_22_cmk_tp02", "duiTxd1", "duiTex")
+		AddReplaceTexture("dt1_22_bld1x", "nxg_dt1_22_cmk_tp02", "duiTxd1", "duiTex")
+		AddReplaceTexture("dt1_22_bldg2_detail2b+hidr", "nxg_dt1_22_cmk_tp02", "duiTxd1", "duiTex")
+		AddReplaceTexture("dt1_22_bld2x", "dt1_22_cmk_tp02", "duiTxd2", "duiTex")
+		AddReplaceTexture("dt1_22_lod", "dt1_22_walls_lod_0001", "duiTxd3", "duiTex")			
+		AddReplaceTexture("dt1_22_lod", "dt1_22_bposter_lod", "duiTxd4", "duiTex")
+		AddReplaceTexture("dt1_lod_emissive_7_20_children", "dt1_22_superlod", "duiTxd5", "duiTex")
+		AddReplaceTexture("dt1_lod_12_13_22_23_children", "dt1_22_superlod", "duiTxd5", "duiTex")
+		print('Texture Primed')
+		Loaded = true
 end)
 
 local Coords
@@ -68,55 +79,17 @@ local Run = false
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(10)
+		if not Loaded then return end
 		if proximity < 650.0 and not Run then
-			 Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd")
-                local duiObj = CreateDui("http://WEBSERVER/dt1_22_cmk_tp02_1024.png", 1024, 1024)
-                _G.duiObj = duiObj
-                local dui = GetDuiHandle(duiObj)
-                local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-                AddReplaceTexture("dt1_22_bld2x+hi", "dt1_22_cmk_tp02", "duiTxd", "duiTex")
-                AddReplaceTexture("dt1_22_bld1x+hi", "nxg_dt1_22_cmk_tp02", "duiTxd", "duiTex")
-                AddReplaceTexture("dt1_22_bld1x", "nxg_dt1_22_cmk_tp02", "duiTxd", "duiTex")
-                AddReplaceTexture("dt1_22_bldg2_detail2b+hidr", "nxg_dt1_22_cmk_tp02", "duiTxd", "duiTex")
-            end)
-
-        Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd")
-                local duiObj = CreateDui("http://WEBSERVER/dt1_22_cmk_tp02_512.png", 512, 512)
-                _G.duiObj = duiObj
-                local dui = GetDuiHandle(duiObj)
-                local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-                AddReplaceTexture("dt1_22_bld2x", "dt1_22_cmk_tp02", "duiTxd", "duiTex")
-            end)
-
-        Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd")
-                local duiObj = CreateDui("http://WEBSERVER/dt1_22_walls_lod_0001.png", 256, 1024)
-                _G.duiObj = duiObj
-                local dui = GetDuiHandle(duiObj)
-                local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-                AddReplaceTexture("dt1_22_lod", "dt1_22_walls_lod_0001", "duiTxd", "duiTex")
-            end)
-
-        Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd")
-                local duiObj = CreateDui("http://WEBSERVER/dt1_22_bposter_lod.png", 256, 512)
-                _G.duiObj = duiObj
-                local dui = GetDuiHandle(duiObj)
-                local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-                AddReplaceTexture("dt1_22_lod", "dt1_22_bposter_lod", "duiTxd", "duiTex")
-            end)
-
-        Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd")
-                local duiObj = CreateDui("http://WEBSERVER/dt1_22_superlod.png", 1024, 1024)
-                _G.duiObj = duiObj
-                local dui = GetDuiHandle(duiObj)
-                local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-                AddReplaceTexture("dt1_lod_emissive_7_20_children", "dt1_22_superlod", "duiTxd", "duiTex")
-                AddReplaceTexture("dt1_lod_12_13_22_23_children", "dt1_22_superlod", "duiTxd", "duiTex")
-        end)
+			AddReplaceTexture("dt1_22_bld2x+hi", "dt1_22_cmk_tp02", "duiTxd1", "duiTex")
+			AddReplaceTexture("dt1_22_bld1x+hi", "nxg_dt1_22_cmk_tp02", "duiTxd1", "duiTex")
+			AddReplaceTexture("dt1_22_bld1x", "nxg_dt1_22_cmk_tp02", "duiTxd1", "duiTex")
+			AddReplaceTexture("dt1_22_bldg2_detail2b+hidr", "nxg_dt1_22_cmk_tp02", "duiTxd1", "duiTex")
+			AddReplaceTexture("dt1_22_bld2x", "dt1_22_cmk_tp02", "duiTxd2", "duiTex")
+			AddReplaceTexture("dt1_22_lod", "dt1_22_walls_lod_0001", "duiTxd3", "duiTex")			
+			AddReplaceTexture("dt1_22_lod", "dt1_22_bposter_lod", "duiTxd4", "duiTex")
+			AddReplaceTexture("dt1_lod_emissive_7_20_children", "dt1_22_superlod", "duiTxd5", "duiTex")
+			AddReplaceTexture("dt1_lod_12_13_22_23_children", "dt1_22_superlod", "duiTxd5", "duiTex")
 			Citizen.CreateThread(function()
 				while true do
 					Wait(0)
