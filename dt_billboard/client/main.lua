@@ -1,9 +1,5 @@
 AddEventHandler("onResourceStart",function(xPlayer)
 		Wait(60000)
-        -- Downtown
-        -- Texture Dictionary : dt1_22_bld2x.ytd
-        -- Texture Dictionary : dt1_22_bld2x+hi.ytd
-        -- Texture Name : dt1_22_cmk_tp02
         Citizen.CreateThread(function()
                 local txd = CreateRuntimeTxd("duiTxd")
                 local duiObj = CreateDui("http://WEBSERVER/dt1_22_cmk_tp02_1024.png", 1024, 1024)
