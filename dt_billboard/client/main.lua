@@ -1,110 +1,68 @@
-local Loaded = false
+local txd = nil
+local textList = {
+	["http://WEBSERVER/img/dt1_22_cmk_tp02_1024.png"] = {
+		TextureName = "duiTxd1",
+		Width = 1024,
+		Height = 1024,
+		Data = {
+			{"dt1_22_bld2x+hi", "dt1_22_cmk_tp02"},
+			{"dt1_22_bld1x+hi", "nxg_dt1_22_cmk_tp02"},
+			{"dt1_22_bld1x", "nxg_dt1_22_cmk_tp02"},
+			{"dt1_22_bldg2_detail2b+hidr", "nxg_dt1_22_cmk_tp02"}
+		},
+		txn = "duiTxn1"
+	},
+	["http://WEBSERVER/img/dt1_22_cmk_tp02_512.png"] = {
+		TextureName = "duiTxd2",
+		Width = 512,
+		Height = 512,
+		Data = {
+			{"dt1_22_bld2x", "dt1_22_cmk_tp02"}
+		},
+		txn = "duiTxn2"
+	},
+	["http://WEBSERVER/img/dt1_22_walls_lod_0001.png"] = {
+		TextureName = "duiTxd3",
+		Width = 256,
+		Height = 1024,
+		Data = {
+			{"dt1_22_lod", "dt1_22_walls_lod_0001"}
+		},
+		txn = "duiTxn3"
+	},
+	["http://WEBSERVER/img/dt1_22_bposter_lod.png"] = {
+		TextureName = "duiTxd4",
+		Width = 256,
+		Height = 512,
+		Data = {
+			{"dt1_22_lod", "dt1_22_bposter_lod"}
+		},
+		txn = "duiTxn4"
+	},
+	["http://WEBSERVER/img/dt1_22_superlod.png"] = {
+		TextureName = "duiTxd5",
+		Width = 1024,
+		Height = 1024,
+		Data = {
+			{"dt1_lod_emissive_7_20_children", "dt1_22_superlod"},
+			{"dt1_lod_12_13_22_23_children", "dt1_22_superlod"}
+		},
+		txn = "duiTxn5"
+	},
+}
 
-RegisterNetEvent('esx:playerLoaded')
-AddEventHandler("esx:playerLoaded",function(xPlayer)
-		Wait(20000)
-        -- Downtown
-        -- Texture Dictionary : dt1_22_bld2x.ytd
-        -- Texture Dictionary : dt1_22_bld2x+hi.ytd
-        -- Texture Name : dt1_22_cmk_tp02
-        Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd1")
-                local duiObj = CreateDui("http://WEBSERVER/dt1_22_cmk_tp02_1024.png", 1024, 1024)
-                _G.duiObj = duiObj
-                local dui = GetDuiHandle(duiObj)
-                local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-		end)
-
-        Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd2")
-                local duiObj = CreateDui("http://WEBSERVER/dt1_22_cmk_tp02_512.png", 512, 512)
-                _G.duiObj = duiObj
-                local dui = GetDuiHandle(duiObj)
-                local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-        end)
-
-        Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd3")
-                local duiObj = CreateDui("http://WEBSERVER/dt1_22_walls_lod_0001.png", 256, 1024)
-                _G.duiObj = duiObj
-                local dui = GetDuiHandle(duiObj)
-                local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-                
-            end)
-
-        Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd4")
-                local duiObj = CreateDui("http://WEBSERVER/dt1_22_bposter_lod.png", 256, 512)
-                _G.duiObj = duiObj
-                local dui = GetDuiHandle(duiObj)
-                local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-            end)
-
-        Citizen.CreateThread(function()
-                local txd = CreateRuntimeTxd("duiTxd5")
-                local duiObj = CreateDui("http://WEBSERVER/dt1_22_superlod.png", 1024, 1024)
-                _G.duiObj = duiObj
-                local dui = GetDuiHandle(duiObj)
-                local tx = CreateRuntimeTextureFromDuiHandle(txd, "duiTex", dui)
-        end)
-		Wait(10000)
-		AddReplaceTexture("dt1_22_bld2x+hi", "dt1_22_cmk_tp02", "duiTxd1", "duiTex")
-		AddReplaceTexture("dt1_22_bld1x+hi", "nxg_dt1_22_cmk_tp02", "duiTxd1", "duiTex")
-		AddReplaceTexture("dt1_22_bld1x", "nxg_dt1_22_cmk_tp02", "duiTxd1", "duiTex")
-		AddReplaceTexture("dt1_22_bldg2_detail2b+hidr", "nxg_dt1_22_cmk_tp02", "duiTxd1", "duiTex")
-		AddReplaceTexture("dt1_22_bld2x", "dt1_22_cmk_tp02", "duiTxd2", "duiTex")
-		AddReplaceTexture("dt1_22_lod", "dt1_22_walls_lod_0001", "duiTxd3", "duiTex")			
-		AddReplaceTexture("dt1_22_lod", "dt1_22_bposter_lod", "duiTxd4", "duiTex")
-		AddReplaceTexture("dt1_lod_emissive_7_20_children", "dt1_22_superlod", "duiTxd5", "duiTex")
-		AddReplaceTexture("dt1_lod_12_13_22_23_children", "dt1_22_superlod", "duiTxd5", "duiTex")
-		print('Texture Primed')
-		Loaded = true
-end)
-
-local Coords
-local TargetZone
-local proximity = 0
-
-Citizen.CreateThread(function()
-	while true do
-		Wait(0)
-		Coords = GetEntityCoords(PlayerPedId())
-		TargetZone = vector3(9.2177, -1027.1779, 46.3701)
-        proximity = GetDistanceBetweenCoords(Coords.x, Coords.y, Coords.z, TargetZone.x, TargetZone.y, TargetZone.z, true)
+RegisterNetEvent('onResourceStart')
+AddEventHandler('onResourceStart',function(resourceName)
+	if (GetCurrentResourceName() ~= resourceName) then
+		return
 	end
-end)
-
-local Run = false
-
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(10)
-		if not Loaded then return end
-		if proximity < 86.0 and not Run then
-			AddReplaceTexture("dt1_22_bld2x+hi", "dt1_22_cmk_tp02", "duiTxd1", "duiTex")
-			AddReplaceTexture("dt1_22_bld1x+hi", "nxg_dt1_22_cmk_tp02", "duiTxd1", "duiTex")
-			AddReplaceTexture("dt1_22_bld1x", "nxg_dt1_22_cmk_tp02", "duiTxd1", "duiTex")
-			AddReplaceTexture("dt1_22_bldg2_detail2b+hidr", "nxg_dt1_22_cmk_tp02", "duiTxd1", "duiTex")
-			AddReplaceTexture("dt1_22_bld2x", "dt1_22_cmk_tp02", "duiTxd2", "duiTex")
-			AddReplaceTexture("dt1_22_lod", "dt1_22_walls_lod_0001", "duiTxd3", "duiTex")			
-			AddReplaceTexture("dt1_22_lod", "dt1_22_bposter_lod", "duiTxd4", "duiTex")
-			AddReplaceTexture("dt1_lod_emissive_7_20_children", "dt1_22_superlod", "duiTxd5", "duiTex")
-			AddReplaceTexture("dt1_lod_12_13_22_23_children", "dt1_22_superlod", "duiTxd5", "duiTex")
-			Citizen.CreateThread(function()
-				while true do
-					Wait(0)
-					if proximity > 86.0 then
-						Run = false
-					else
-						Run = true
-					end
-				end
-			end)
-			Citizen.CreateThread(function()
-				while Run do
-					Citizen.Wait(0)
-				end
-			end)
+	for urlKey, thisEntry in pairs(textList) do
+		txd = CreateRuntimeTxd(thisEntry.txn)
+		local duiObj = CreateDui(urlKey, thisEntry.Width, thisEntry.Height)
+		local dui = GetDuiHandle(duiObj)
+		CreateRuntimeTextureFromDuiHandle(txd, thisEntry.TextureName, dui)
+		for _, innerTable in ipairs(thisEntry.Data) do
+			AddReplaceTexture(innerTable[1], innerTable[2], thisEntry.txn, thisEntry.TextureName)
 		end
 	end
 end)
